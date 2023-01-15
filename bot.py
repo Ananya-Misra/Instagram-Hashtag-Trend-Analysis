@@ -94,7 +94,7 @@ def getdata(driver,posts, page=""):
         else:
             print("not found")
             time.sleep(5)
-        return raw_data
+    return raw_data
 
 
 # to convert data to dataframe
@@ -107,3 +107,5 @@ def covert_data_to_df(raw_data):
 def convert_df_to_csv(df):
     df.to_csv('hastags_rawdata1.csv', index=None)
     print('Process Completed')
+
+
