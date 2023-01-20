@@ -15,6 +15,7 @@ engine = create_engine('sqlite:///db.sqlite3')
 Session = sessionmaker(bind=engine)
 sess = Session()
 
+#login page
 @app.route('/',methods=['GET','POST'])
 def index():
     if request.method == 'POST':
