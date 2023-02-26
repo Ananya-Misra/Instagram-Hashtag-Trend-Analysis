@@ -17,6 +17,7 @@ def opendb():
     Session = sessionmaker(bind=engine)
     return Session()
 
+#login page
 @app.route('/',methods=['GET','POST'])
 def index():
     if request.method == 'POST':
