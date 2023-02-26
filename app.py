@@ -12,23 +12,31 @@ from flask import Flask,session,flash,redirect,render_template,url_for
 # login page 
 app = Flask(__name__)
 app.secret_key = "the basics of life with python"
-engine = create_engine('sqlite:///db.sqlite3')
-Session = sessionmaker(bind=engine)
-sess = Session()
 
+def opendb():
+    engine = create_engine('sqlite:///db.sqlite3')
+    Session = sessionmaker(bind=engine)
+    return Session()
+
+#login page
 @app.route('/',methods=['GET','POST'])
 def index():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         if email and validate_email(email):
-            newuser = User(email=email,password=password)
-            if newuser:
-                session['id'] = newuser.id
-                session['username'] = newuser.name
-                session['is_auth'] = True
-                flash('Login successful','success')
-                return redirect('/home')
+            db = opendb()
+            user = db.query(User).filter(User.email == email).first()
+            db.close()
+            if user:
+                if user.password == password:
+                    session['id'] = user.id
+                    session['username'] = user.name
+                    session['is_auth'] = True
+                    flash('Login successful','success')
+                    return redirect('/home')
+                else:
+                    flash("Invalid Password", 'danger')
             else:
                 flash('Wrong credentials','danger')
         else:
@@ -48,8 +56,10 @@ def signup():
                     if cpassword and cpassword == password:
                         try:
                             newuser = User(name=name,email=email,password=password)
-                            sess.add(newuser)
-                            sess.commit()
+                            db = opendb()
+                            db.add(newuser)
+                            db.commit()
+                            db.close()
                             print(newuser)
                             flash('Registration successful','success')
                             return redirect('/')
