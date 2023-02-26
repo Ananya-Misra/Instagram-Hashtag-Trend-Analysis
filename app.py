@@ -9,6 +9,7 @@ from utils import *
 
 from flask import Flask,session,flash,redirect,render_template,url_for
 
+# login page 
 app = Flask(__name__)
 app.secret_key = "the basics of life with python"
 engine = create_engine('sqlite:///db.sqlite3')
