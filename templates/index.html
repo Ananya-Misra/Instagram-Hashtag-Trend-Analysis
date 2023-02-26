@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    body{
+        background-color: #E27D60;
+        background-image: url('/static/images/register_page_hero.svg');
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container vh-100">
+    <div class="row">
+        <div class="col-sm-12 col-md-7" style="margin-top: 6rem;">
+            {% include "notification.html" %}
+            <div class="card shadow-lg m-4">
+                <div class="card-header">
+                    <div class="card-title"><h2>Login</h2></div>
+                </div>
+                <form method="POST" class="p-2">
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email"
+                          class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="john@gmail.com">
+                        <small id="emailHelp" class="form-text text-muted">Enter Your Email Address</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password"
+                          class="form-control" name="password" id="password" aria-describedby="passhelpId" placeholder="Minimum 6 characters">
+                        <small id="passhelpId" class="form-text text-muted">Enter Your Password</small>
+                    </div>
+                      
+                      <button class="btn btn-success btn-block">Continue</button>
+                      <div class="container" style="padding-top: 1rem;">
+                        <span class="psw"><a href="/forgot">Forgot password?</a></span>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}{% endblock %}
