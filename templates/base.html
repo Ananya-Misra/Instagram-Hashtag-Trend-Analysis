@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
 <!--    ------------------------------------->
@@ -35,13 +35,19 @@
         }
         :root {
             --bg-color: white;
-            --text-color: #A1C3D1;
+            --text-color:
+                    #A1C3D1;
             --main-color: #F172A1;
+            --main-color1:linear-gradient(to right,#A1C3D1, #F172A1);
+             --p-font: 1.2rem;
+             --h2-font: 1.8rem;
+            --big-font: 3.5rem;
         }
+
         body {
             min-height: 100vh;
-            background: var(--bg-color);
-            color: var(--text-color);
+            color: #fff;
+             background: var(--main-color1);
         }
         header {
             position: relative;

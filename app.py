@@ -53,8 +53,8 @@ def signup():
                     if cpassword and cpassword == password:
                         try:
                             newuser = User(name=name, email=email, password=password)
-                            sess.add(newuser)
-                            sess.commit()
+                            session.add(newuser)
+                            session.commit()
                             print(newuser)
                             flash('Registration successful', 'success')
                             return redirect('/')
@@ -96,6 +96,7 @@ def main():
             time.sleep(4)
             try:
                 login(mdriver, session['insta_username'], session['insta_password'], 3)
+                time.sleep(3)
                 notnow = mdriver.find_element("xpath", "//button[contains(text(), 'Not Now')]")
 
                 print(notnow)
@@ -116,7 +117,6 @@ def scrape():
     print("Its scrape timee 1-1")
     if 'is_auth' not in session or session['is_auth'] != True:
         flash('Wrong credentials', 'danger')
-
         return redirect('/main')
     if request.method == 'POST':
         scroll = int(request.form.get('scroll'))
