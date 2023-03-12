@@ -5,41 +5,49 @@ from flask.globals import request
 from flask import session
 from sqlalchemy import create_engine
 from sqlalchemy import engine
-
 from sqlalchemy.orm import sessionmaker
 from project_orm import User
 from utils import *
 from bot2 import *
 
-from flask import Flask, session, flash, redirect, render_template, url_for
+from flask import Flask,session,flash,redirect,render_template,url_for
 
 # login page 
 app = Flask(__name__)
 app.secret_key = "the basics of life with python"
 
+def opendb():
+    engine = create_engine('sqlite:///db.sqlite3')
+    Session = sessionmaker(bind=engine)
+    return Session()
 
-@app.route('/', methods=['GET', 'POST'])
+#login page
+@app.route('/',methods=['GET','POST'])
 def index():
     print("fghjkljdddddddddddddd");
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         if email and validate_email(email):
-            newuser = User(email=email, password=password)
-            if newuser:
-                session['id'] = newuser.id
-                session['username'] = newuser.name
-                session['is_auth'] = True
-                flash('Login successful', 'success')
-                return redirect('/home')
+            db = opendb()
+            user = db.query(User).filter(User.email == email).first()
+            db.close()
+            if user:
+                if user.password == password:
+                    session['id'] = user.id
+                    session['username'] = user.name
+                    session['is_auth'] = True
+                    flash('Login successful','success')
+                    return redirect('/home')
+                else:
+                    flash("Invalid Password", 'danger')
             else:
-                flash('Wrong credentials', 'danger')
+                flash('Wrong credentials','danger')
         else:
             flash('Invalid Email', 'danger')
-    return render_template('index.html', title='Login')
+    return render_template('index.html',title='Login')
 
-
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
         name = request.form.get('name')
@@ -51,15 +59,21 @@ def signup():
             if email and validate_email(email):
                 if password and len(password) >= 6:
                     if cpassword and cpassword == password:
-                        try:
-                            newuser = User(name=name, email=email, password=password)
-                            session.add(newuser)
-                            session.commit()
-                            print(newuser)
-                            flash('Registration successful', 'success')
-                            return redirect('/')
-                        except:
-                            flash('Email account already exists', 'danger')
+                        db = opendb()
+                        is_existing = db.query(User).filter(User.email == email).first()
+                        if is_existing:
+                            flash('Email already exists','danger')
+                        else:
+                            try:
+                                newuser = User(name=name,email=email,password=password)
+                                db = opendb()
+                                db.add(newuser)
+                                db.commit()
+                                db.close()
+                                flash('Registration successful','success')
+                                return redirect('/')
+                            except Exception as e:
+                                flash('Some error occurred','danger')
                     else:
                         flash('Password does not match', 'danger')
                 else:
@@ -68,18 +82,15 @@ def signup():
                 flash('Invalid Email', 'danger')
         else:
             flash('Invalid name, must be 3 or more characters', 'danger')
-    return render_template('signup.html', title='Register')
+    return render_template('index.html',title='Register')
 
-
-@app.route('/forgot', methods=['GET', 'POST'])
+@app.route('/forgot',methods=['GET','POST'])
 def forgot():
-    return render_template('forgot.html', title='Forgot Password')
+    return render_template('forgot.html',title='Forgot Password')
 
-
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home',methods=['GET','POST'])
 def home():
-    return render_template('home.html', title='Home')
-
+    return render_template('home.html',title='Home')
 
 @app.route('/main', methods=['GET', 'POST'])
 def main():
@@ -96,7 +107,6 @@ def main():
             time.sleep(4)
             try:
                 login(mdriver, session['insta_username'], session['insta_password'], 3)
-                time.sleep(3)
                 notnow = mdriver.find_element("xpath", "//button[contains(text(), 'Not Now')]")
 
                 print(notnow)
@@ -111,12 +121,12 @@ def main():
 
     return render_template('main.html', title='Main')
 
-
 @app.route('/scrape', methods=['GET', 'POST'])
 def scrape():
     print("Its scrape timee 1-1")
     if 'is_auth' not in session or session['is_auth'] != True:
         flash('Wrong credentials', 'danger')
+
         return redirect('/main')
     if request.method == 'POST':
         scroll = int(request.form.get('scroll'))
@@ -154,18 +164,15 @@ def scrape():
 
     return render_template('scrapping.html', title='Scrapping')
 
-
 @app.route('/about')
 def about():
-    return render_template('about.html', title='About Us')
-
+    return render_template('about.html',title='About Us')
 
 @app.route('/logout')
 def logout():
-    if session.get('is_auth', False):
+    if session.get('is_auth',False):
         session.clear()
     return redirect('/')
-
 
 if __name__ == "__main__":
     app.run(debug=True)
