@@ -54,17 +54,21 @@ def signup():
             if email and validate_email(email):
                 if password and len(password) >= 6:
                     if cpassword and cpassword == password:
-                        try:
-                            newuser = User(name=name,email=email,password=password)
-                            db = opendb()
-                            db.add(newuser)
-                            db.commit()
-                            db.close()
-                            print(newuser)
-                            flash('Registration successful','success')
-                            return redirect('/')
-                        except:
-                            flash('Email account already exists','danger')
+                        db = opendb()
+                        is_existing = db.query(User).filter(User.email == email).first()
+                        if is_existing:
+                            flash('Email already exists','danger')
+                        else:
+                            try:
+                                newuser = User(name=name,email=email,password=password)
+                                db = opendb()
+                                db.add(newuser)
+                                db.commit()
+                                db.close()
+                                flash('Registration successful','success')
+                                return redirect('/')
+                            except Exception as e:
+                                flash('Some error occurred','danger')
                     else:
                         flash('Password does not match', 'danger')
                 else:
@@ -73,7 +77,7 @@ def signup():
                 flash('Invalid Email', 'danger')
         else:
             flash('Invalid name, must be 3 or more characters', 'danger')
-    return render_template('signup.html',title='Register')
+    return render_template('index.html',title='Register')
 
 @app.route('/forgot',methods=['GET','POST'])
 def forgot():
