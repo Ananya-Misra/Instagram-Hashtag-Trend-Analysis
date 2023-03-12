@@ -285,6 +285,7 @@
     <header id="stic">
         <a style="text-decoration: none;" href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Instant</span></a>
 
+        {% if session.is_auth%}
         <ul class="navbar">
             <li>
                 <a href="/home">Home</a>
@@ -299,6 +300,9 @@
                 <a href="/scrape">Scrapping</a>
             </li>
         </ul>
+        {% else %}
+                <!--  -->
+        {% endif %}
 
         <div class="main">
             {% if not session.is_auth%}
@@ -306,8 +310,8 @@
                 <a href="/signup">Register</a>
             {% else %}
                 <a href="/logout">Sign Out</a>
+                <div class="bx bx-menu" id="menu-icon"></div>
             {% endif %}
-            <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </header>
     <!-- END OF NAVBAR -->
