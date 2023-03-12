@@ -9,6 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
+<!--    ------------------------------------->
+
+
     {% block css %}{% endblock %}
 </head>
 <body>
@@ -17,6 +21,12 @@
         {% if not session.is_auth %}
         <li class="nav-item">
             <a class="nav-link" href="/">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/main">Main</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/scrape">Scrapping</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/signup">Register</a>
@@ -28,6 +38,7 @@
         <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
         </li>
