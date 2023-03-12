@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{{title}}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    {% block css %}{% endblock %}
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;  600&display=swap" rel="stylesheet">
+
+    <style>
+        /* navbar styles */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+        :root {
+            --bg-color: white;
+            --text-color: #A1C3D1;
+            --main-color: #F172A1;
+        }
+        body {
+            min-height: 100vh;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        header {
+            position: relative;
+            width: 100%;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-color);
+            padding-right: 12%;
+            padding-left: 12%;
+            padding-top: 0;
+            padding-bottom: 0;
+            transition: all .50s ease;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo i {
+            color: var(--main-color);
+            font-size: 28px;
+            margin-right: 3px;
+        }
+        .logo span {
+            color: var(--text-color);
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+        .navbar {
+            display: flex;
+        }
+        .navbar a {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 5px 0;
+            margin: 0px 30px;
+            transition: all .50s ease;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            color: var(--main-color);
+        }
+        .main {
+            display: flex;
+            align-items: center;
+        }
+        .main a {
+            margin-right: 25px;
+            margin-left: 10px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all .50s ease;
+            text-decoration: none;
+        }
+        .user {
+            display: flex;
+            align-items: center;
+        }
+        .user i {
+            color: var(--main-color);
+            font-size: 28px;
+            margin-right: 7px;
+        }
+        .main a:hover {
+            color: var(--main-color);
+        }
+        #menu-icon {
+            font-size: 35px;
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 10001;
+            display: none;
+        }
+
+
+        @media (max-width: 1280px) {
+            header {
+                padding: 14px 2%;
+                transition: .2s;
+            }
+            .navbar a {
+                padding: 5px 0;
+                margin: 0px 20px;
+                text-decoration: none;
+            }
+        }
+
+
+        @media (max-width: 1090px) {
+            #menu-icon {
+                display: block;
+            }
+            body {
+                overflow-x: hidden;
+            }
+            .navbar {
+                position: absolute;
+                top: 100%;
+                right: -100%;
+                width: 270px;
+                height: 29vh;
+                background-color: #A1C3D1;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                border-radius: 10px;
+                transition: all .50s ease;
+            }
+            .navbar a {
+                display: block;
+                margin: 12px 0;
+                padding: 0px 25px;
+                transition: all .50s ease;
+                text-decoration: none;
+                color: #E64398;
+            }
+            .navbar a:hover {
+                color: #E64398;
+                transform: translateY(5px);
+            }
+            .navbar.open {
+                right: 2%;
+            }
+        }
+        /* end of navbar styles */
+
+        /* footer styles */
+        .footer {
+            margin-top: 200px;
+        }
+        footer {
+            position: relative;
+            width: 100%;
+            background: #F172A1;
+            min-height: 100px;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        footer .social_icon,
+        footer .menu {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        footer .social_icon li,
+        footer .menu li {
+            list-style: none;
+        }
+        footer .social_icon li a {
+            font-size: 2em;
+            color: #F0EBF4;
+            margin: 0 10px;
+            display: inline-block;
+            transition: 0.5s;
+        }
+        footer .social_icon li a:hover {
+            transform: translateY(-10px);
+        }
+        footer .menu li a {
+            font-size: 1.2em;
+            color: #F0EBF4;
+            margin: 0 10px;
+            display: inline-block;
+            text-decoration: none;
+            opacity: 0.75;
+        }
+        footer .menu li a:hover {
+            opacity: 1;
+        }
+        footer p {
+            color: #F0EBF4;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        footer .wave {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url(/static/images/wave.png);
+            background-size: 1000px 100px;
+        }
+        footer .wave#wave1 {
+            z-index: 1000;
+            opacity: 1;
+            bottom: 0;
+            animation: animateWave 4s linear infinite;
+        }
+        footer .wave#wave2 {
+            z-index: 999;
+            opacity: 0.5;
+            bottom: 10px;
+            animation: animateWave_02 4s linear infinite;
+        }
+
+
+        footer .wave#wave3 {
+            z-index: 1000;
+            opacity: 0.2;
+            bottom: 15px;
+            animation: animateWave 3s linear infinite;
+        }
+        footer .wave#wave4 {
+            z-index: 999;
+            opacity: 0.7;
+            bottom: 20px;
+            animation: animateWave_02 3s linear infinite;
+        }
+
+        @keyframes animateWave {
+            0% {
+                background-position-x: 1000px;
+            }
+            100% {
+                background-position-x: 0px;
+            }
+        }
+        @keyframes animateWave_02 {
+            0% {
+                background-position-x: 0px;
+            }
+            100% {
+                background-position-x: 1000px;
+            }
+        }
+        /* end of footer styles */
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header id="stic">
+        <a style="text-decoration: none;" href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Instant</span></a>
+
+        <ul class="navbar">
+            <li>
+                <a href="/home">Home</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+        </ul>
+
+        <div class="main">
+            {% if not session.is_auth%}
+                <a href="/" class="user"><i class="ri-user-fill"></i>Sign In</a>
+                <a href="/signup">Register</a>
+            {% else %}
+                <a href="/logout">Sign Out</a>
+            {% endif %}
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </header>
+    <!-- END OF NAVBAR -->
+    {% block body %}{% endblock %}
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="social_icon">
+            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+        </ul>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <p>© 2023 Instant | All Rights Reserved</p>
+    </footer>   
+    <!-- END OF FOOTER -->
+
+    <!-- Optional JavaScript -->
+    <script>
+        let menu = document.querySelector('#menu-icon');
+        let navbar = document.querySelector('.navbar');
+
+        menu.onclick = () => {
+            menu.classList.toggle('bx-x');
+            navbar.classList.toggle('open');
+        }
+
+
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function() {myFunction()};
+
+        // Get the navbar
+        var stic = document.getElementById("stic");
+
+        // Get the offset position of the navbar
+        var sticky = stic.offsetTop;
+
+        // Add the sticky class to the navbar when you reach its scroll         position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+          if (window.pageYOffset >= sticky) {
+            stic.classList.add("sticky")
+          } else {
+            stic.classList.remove("sticky");
+          }
+        }
+
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
+    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    {% block js %}{% endblock %}
+</body>
+</html>

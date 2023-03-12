@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block css %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Raleway:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+body h1 {
+  letter-spacing: 1px;
+  color: rgba(0,0,0,0.8);
+  position: relative;
+
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+body p {
+  color: rgba(0,0,0,0.8);
+}
+
+.container {
+  width: 1100px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  padding: 20px;
+}
+
+.container .box {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+  text-align: center;
+
+  flex: 1 1 21rem;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  padding: 10px 20px;
+  align-self: normal;
+}
+
+.container .box1 {
+  margin-left: 150px; 
+  margin-right: 20px;
+}
+
+.container .box2 {
+  margin-left: 20px; 
+  margin-right: 150px;
+}
+
+.container .box::before {
+  position: absolute;
+  content: "";
+  top: 99%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #B39BC8;
+  background-image: linear-gradient(315deg,#B39BC8 0%,#B39BC8 74%);
+  transition: 0.4s;
+}
+
+.container .box:hover::before {
+    top: 48%;
+}
+  
+.container .box .imgbox {
+    width: 100%;
+    height: 50%;
+}
+  
+.container .box .imgbox img {
+    max-width: 200px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+  
+.container .box:hover h1 {
+    color: white;
+}
+  
+.container .box p {
+    font-size: 14px;
+    position: relative;
+    margin-bottom: 10px;
+}
+  
+.container .box:hover p {
+    color: white;
+}
+  
+.container .box .textbox {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 1090px) {
+    .container {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .container .box1,
+    .container .box2 {
+      margin: 25px 50px;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="box box1">
+      <div class="imgbox">
+        <img src="/static/images/1.png" alt="">
+      </div>
+      <div class="textbox">
+        <h1>Exposure to New Followers</h1>
+        <p>
+          Influencers can expose their content to a wider audience and attract new followers. This leads to increased engagement, more followers, and new opportunities for collaborations and sponsorships. 
+        </p>
+      </div>  
+    </div>
+    <div class="box box2">
+      <div class="imgbox">
+        <img src="/static/images/2.png" alt="">
+      </div>
+      <div class="textbox">
+        <h1>Better Understanding of the Market</h1>
+        <p>
+          Content creators can gain a better understanding of the topics and issues that are of most interest to their target audience. Additionally, influencers can also gain a competitive edge over their competitors.
+        </p>
+      </div>
+    </div>
+    <div class="box box1">
+      <div class="imgbox">
+        <img src="/static/images/3.png" alt="">
+      </div>
+      <div class="textbox">
+        <h1>Web Visibility</h1>
+        <p>
+          By staying up-to-date with the latest social media hashtag trends and using them in their posts, influencers can ensure that their content remains relevant and in front of the right audience.
+        </p>
+      </div>
+    </div>
+    <div class="box box2">
+      <div class="imgbox">
+        <img src="/static/images/4.png" alt="">
+      </div>
+      <div class="textbox">
+        <h1>Open Source</h1>
+        <p>
+          Our Instagram hashtag trend analysis tool offers a cost-effective and flexible solution for organizations and individuals looking to analyze Instagram hashtags. It provides valuable insights into the use of hashtags on the social media platform.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block js %}{% endblock %}
