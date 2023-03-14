@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from selenium import webdriver
 from project_orm import User
 from utils import *
+import sqlite3
 from bot2 import *
 
 from flask import Flask,session,flash,redirect,render_template,url_for
@@ -40,7 +41,7 @@ def index():
                     session['username'] = user.name
                     session['is_auth'] = True
                     flash('Login successful','success')
-                    return redirect('/home')
+                    return redirect('/main')
                 else:
                     flash("Invalid Password", 'danger')
             else:
@@ -160,6 +161,7 @@ def scrape():
             mdriver = webdriver.Chrome(ChromeDriverManager().install())
             insertColPost("hashtag_" + tableName)
             readSqliteTable("hashtag_" + tableName, mdriver, sleeptime)
+            print("hashtag_"+tableName)
         except Exception as e:
             print(e)
             print("The error")
