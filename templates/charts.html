@@ -1,40 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Chartjs Charts</title>
-</head>
+{% block body %}
+<link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<div class="container">
+        <div class="col-md-12 py-5">
+            {{figure|safe}}
+        </div>
+        <div class="col-md-12 py-5">
+            {{figure1|safe}}
+        </div>
+         <div class="row">
+            <div class="col-md-12 mx-auto">
+    <!--            for safety-->
+                {{out|safe}}
+            </div>
 
-<body>
-    <div style="height: 50vh; width: 50%;">
-        <canvas id="myChart"></canvas>
-    </div>
-
-    <script>
-        const labels = {{ labels | tojson}};
-
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Sales',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: {{ data | tojson}},
-            }]
-        };
-
-        const config = {
-            type: 'line',
-            data: data,
-            options: { maintainAspectRatio: false }
-        };
-
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
-
-    </script>
-</body>
-</html>
+         </div>
+</div>
+{% endblock %}
+{% block javascript%}
+<script crossorigin="anonymous"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(() => {
+        let table = new DataTable('.dataframe', {
+            responsive: true
+        });
+    })
+</script>
+{%endblock%}
