@@ -1,5 +1,7 @@
 import json
 
+from utils import validate_email
+
 import plotly.express as px
 from flask import Flask, session, flash, redirect, render_template
 from flask.globals import request

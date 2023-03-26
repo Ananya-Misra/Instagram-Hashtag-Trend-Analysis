@@ -40,23 +40,22 @@
 /*#374785*/
 /*#24305E*/
         :root {
-            --bg-color:white;
-            --text-color:black;
-        ;
-            /*#F172A1;*/
-            /*#A1C3D1;*/
+            --bg-color: #A8D0E6;
+            --text-color:#202020;
+                    /*#F172A1;*/
+                    /*#A1C3D1;*/
             /*--main-color: #F172A1;*/
             --main-color1: linear-gradient(to right, #A1C3D1, #F172A1);
             --p-font: 1.2rem;
             --h2-font: 1.8rem;
             --big-font: 3.5rem;
-            --btn-color:#F76C6C
+            --btn-color:#F76C6C;
         }
 
         body {
             min-height: 100vh;
             color: var(--text-color);
-            background: var(--bg-color);
+             background:#A8D0E6;
         }
 
         header {
@@ -179,7 +178,7 @@
         }
 
 
-        @media (max-width: 1090px) {
+        @media (max-width: 360px) {
             #menu-icon {
                 display: block;
             }
@@ -191,10 +190,10 @@
             .navbar {
                 position: absolute;
                 top: 100%;
-                right: -100%;
+                right: 2%;
                 width: 270px;
                 height: 29vh;
-                background-color: #A1C3D1;
+                background-color: #A8D0E6;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -231,7 +230,7 @@
         footer {
             position: relative;
             width: 100%;
-            background: var(--);
+            background: #F8E9A1;
             min-height: 100px;
             padding: 20px 50px;
             display: flex;
@@ -257,7 +256,7 @@
 
         footer .social_icon li a {
             font-size: 2em;
-            color: #F0EBF4;
+            color: var(--text-color);
             margin: 0 10px;
             display: inline-block;
             transition: 0.5s;
@@ -269,7 +268,7 @@
 
         footer .menu li a {
             font-size: 1.2em;
-            color: #F0EBF4;
+            color: var(--text-color);
             margin: 0 10px;
             display: inline-block;
             text-decoration: none;
@@ -281,7 +280,7 @@
         }
 
         footer p {
-            color: #F0EBF4;
+            color: var(--text-color);
             text-align: center;
             margin-top: 15px;
             margin-bottom: 10px;
@@ -374,54 +373,40 @@
         <h4>Instant</h4>
     </div>
 
-    <div class="main">
-        {% if not session.is_auth%}
-        <a class="user" href="/">Sign In</a>
-        <a href="/signup">Register</a>
-        {% else %}
-        <a href="/main">Home</a>
-        <a href="/logout">Sign Out</a>
-        <div class="bx bx-menu" id="menu-icon"></div>
-        {% endif %}
-    </div>
-</header>
-<!-- END OF NAVBAR -->
-{% include "notification.html" %}
-{% block body %}{% endblock %}
-
-
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="waves">
-        <div class="wave" id="wave1"></div>
-        <div class="wave" id="wave2"></div>
-        <div class="wave" id="wave3"></div>
-        <div class="wave" id="wave4"></div>
-    </div>
-    <ul class="social_icon">
-        <li><a href="#">
-            <ion-icon name="logo-facebook"></ion-icon>
-        </a></li>
-        <li><a href="#">
-            <ion-icon name="logo-twitter"></ion-icon>
-        </a></li>
-        <li><a href="#">
-            <ion-icon name="logo-linkedin"></ion-icon>
-        </a></li>
-        <li><a href="#">
-            <ion-icon name="logo-instagram"></ion-icon>
-        </a></li>
-    </ul>
-    <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Team</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-    <p>© 2023 Instant | All Rights Reserved</p>
-</footer>
-<!-- END OF FOOTER -->
+        <div class="main">
+            {% if not session.is_auth%}
+                <a href="/" class="user">Sign In</a>
+                <a href="/signup">Register</a>
+            {% else %}
+                <a href="/main">Home</a>
+                <a href="/logout">Sign Out</a>
+            {% endif %}
+        </div>
+    </header>
+    <!-- END OF NAVBAR -->
+    {% include "notification.html" %}
+    {% block body %}{% endblock %}
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="social_icon">
+            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+        </ul>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+        </ul>
+        <p>© 2023 Instant | All Rights Reserved</p>
+    </footer>   
+    <!-- END OF FOOTER -->
 
 <!-- Optional JavaScript -->
 {% block javascript%}
