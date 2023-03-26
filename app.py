@@ -7,7 +7,6 @@ from flask import Flask, session, flash, redirect, render_template
 from flask.globals import request
 from sqlalchemy.orm import sessionmaker
 from webdriver_manager.chrome import ChromeDriverManager
-import sqlite3
 
 from bot2 import *
 from project_orm import User
@@ -16,6 +15,7 @@ from utils import *
 # login page
 app = Flask(__name__)
 app.secret_key = "the basics of life with python"
+
 
 # %%
 
@@ -118,18 +118,12 @@ def check_credentials():
     mdriver.get("https://www.instagram.com/")
     time.sleep(4)
     print(session.items())
-    try:
-        login(mdriver, session['insta_username'], session['insta_password'], 3)
-        notnow = mdriver.find_element("xpath", "//button[contains(text(), 'Not Now')]")
-        print(notnow)
-        mdriver.quit()
+    if (login(mdriver, session['insta_username'], session['insta_password'], 3)):
         session['is_auth'] = True
         flash('Successful', 'success')
         return redirect('/scrape')
-    except Exception as e:
-        flash('Try One Time', 'warning')
-        print(e)
-        print("Hellll nooooooooooooooooooooo")
+    flash('Wrong Credentials', 'warning')
+    print("Hellll nooooooooooooooooooooo")
     time.sleep(3)
     return redirect('/main')
 
@@ -193,7 +187,6 @@ def scrape():
             print(e)
             print("The error")
 
-
     return render_template('scrapping.html', title='Scrapping')
 
 
@@ -227,21 +220,29 @@ def line_chart():
 #     df=sqlToDf('hashtag_'+session['tableName'])
 
 
-@app.route('/chart')
+@app.route('/chart', methods=['GET', 'POST'])
 def chart():
     # Define Plot Data
     # 'hashtag__04_03_23'
     # option = request.form.get("range")
+    if request.method == 'POST':
+        tag_size = request.form.get('tag_size')
+    else:
+        tag_size = 50
     all_insta_tables = []
     for name in sql_fetch():
         all_insta_tables.append(sqlToDf(name))
     df = pd.concat(all_insta_tables)
-    fig = px.bar(df[:50], x='tag', y='posts', log_y=True, )
-    fig1 = px.bar(df[:50], x='posts', y='date', log_y=True, )
-    out = df.drop(columns=['link','page','img']).copy()
+    df.sort_values(by='posts', ascending=False, inplace=True)
+    fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True, )
+    idf = pd.concat(all_insta_tables)
+    date_df = idf.groupby('date')['posts'].sum()
+    fig1 = px.ecdf(date_df, date_df.index, 'posts')
+    fig2 = px.bar(df[:50], x='tag', y='date', log_y=True, )
+    out = df.drop(columns=['link', 'page', 'img']).copy()
 
-
-    return render_template('charts.html', out=out.to_html(index=False), figure=fig.to_html(),figure1= fig1.to_html())
+    return render_template('charts.html', out=out.to_html(index=False), figure=fig.to_html(), figure1=fig1.to_html(),
+                           figure2=fig2.to_html(),ts = tag_size)
 
 
 if __name__ == "__main__":

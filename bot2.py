@@ -16,6 +16,16 @@ import numpy as np
 
 # --------------------------------------------- **BOT 1---------------------------------------------------------**
 
+# check_credentials
+def check_credentials(driver):
+    try:
+       driver.find_element("xpath", "//p[contains(text(), 'Sorry, your password was incorrect. Please double-check your password.')]")
+       present = False
+       print("error")
+    except Exception as e:
+       print("yess")
+       present = True
+    return present
 # login
 def login(driver, instahandle, instapassword, sleeptime):
     username = driver.find_element(By.CSS_SELECTOR, "input[name='username']")
@@ -26,13 +36,13 @@ def login(driver, instahandle, instapassword, sleeptime):
     password.send_keys(instapassword)
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
     time.sleep(sleeptime)
-    return True
+    return check_credentials(driver)
 
 
 def skip_login_info(driver, sleeptime):
     # save your login info?
     time.sleep(sleeptime)
-    notnow = driver.find_element("xpath", "//button[contains(text(), 'Not Now')]").click()
+    notnow = driver.find_element("xpath", "//div[contains(text(), 'Not Now')]").click()
 
 
 def turn_off_notif(driver, sleeptime):
