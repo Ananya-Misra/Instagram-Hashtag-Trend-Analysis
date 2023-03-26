@@ -101,6 +101,11 @@ def signup():
 def forgot():
     return render_template('forgot.html', title='Forgot Password')
 
+@app.route('/loading', methods=['GET', 'POST'])
+def loading():
+    return render_template('loader.html', title='Loading')
+
+
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
