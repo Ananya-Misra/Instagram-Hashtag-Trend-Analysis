@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <title>{{title}}</title>
     <!-- Required meta tags -->
@@ -8,18 +9,20 @@
 
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
-          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" rel="stylesheet">
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" rel="stylesheet">
     {% block css %}{% endblock %}
 
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
-          rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;  600&display=swap" rel="stylesheet">
+
+    <!-- aos css -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         /* navbar styles */
@@ -34,32 +37,33 @@
             list-style: none;
             scroll-behavior: smooth;
         }
-/*#F8E9A1*/
-/*#F76C6C*/
-/*A8D0E6*/
-/*#374785*/
-/*#24305E*/
+
+        /*#F8E9A1*/
+        /*#F76C6C*/
+        /*A8D0E6*/
+        /*#374785*/
+        /*#24305E*/
         :root {
             --bg-color: #6C63FF;
-            --text-color:#202020;
-                    /*#F172A1;*/
-                    /*#A1C3D1;*/
+            --text-color: #202020;
+            /*#F172A1;*/
+            /*#A1C3D1;*/
             /*--main-color: #F172A1;*/
             --main-color1: linear-gradient(to right, #A1C3D1, #F172A1);
             --p-font: 1.2rem;
             --h2-font: 1.8rem;
             --big-font: 3.5rem;
-            --btn-color:#F76C6C;
+            --btn-color: #F76C6C;
         }
 
         body {
             min-height: 100vh;
             color: var(--text-color);
-            background:white;
+            background: white;
         }
 
         header {
-            --bg-color:white;
+            --bg-color: white;
             position: sticky;
             width: 100%;
             top: 0;
@@ -69,7 +73,7 @@
             align-items: center;
             justify-content: space-between;
             background-color: var(--bg-color);
-            background-image: linear-gradient(315deg,#6C63FF 4%,#B39BC8 74%);
+            background-image: linear-gradient(315deg, #6C63FF 4%, #B39BC8 74%);
             padding-right: 12%;
             padding-left: 12%;
             padding-top: 1%;
@@ -352,6 +356,7 @@
             0% {
                 background-position-x: 1000px;
             }
+
             100% {
                 background-position-x: 0px;
             }
@@ -361,6 +366,7 @@
             0% {
                 background-position-x: 0px;
             }
+
             100% {
                 background-position-x: 1000px;
             }
@@ -369,29 +375,30 @@
         /* end of footer styles */
     </style>
 </head>
+
 <body>
-<!-- NAVBAR -->
-<header id="stic">
-    <!--        <a style="text-decoration: none;" href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Instant</span></a>-->
-    <div class="logo">
-        <img alt="instant" src="/static/images/mlogo1.svg"/>
-        <h4 style="color: white;">Instant</h4>
-    </div>
+    <!-- NAVBAR -->
+    <header id="stic">
+        <!--        <a style="text-decoration: none;" href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Instant</span></a>-->
+        <div class="logo">
+            <img alt="instant" src="/static/images/mlogo1.svg" />
+            <h4 style="color: white;">Instant</h4>
+        </div>
 
         <div class="main">
             {% if not session.is_auth%}
-                <a href="/" class="user">Sign In</a>
-                <a href="/signup">Register</a>
+            <a href="/" class="user">Sign In</a>
+            <a href="/signup">Register</a>
             {% else %}
-                <a href="/main">Home</a>
-                <a href="/logout">Sign Out</a>
+            <a href="/main">Home</a>
+            <a href="/logout">Sign Out</a>
             {% endif %}
         </div>
     </header>
     <!-- END OF NAVBAR -->
     {% include "notification.html" %}
     {% block body %}{% endblock %}
-    
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="waves">
@@ -410,59 +417,64 @@
             <li><a href="#">Home</a></li>
         </ul>
         <p>© 2023 Instant | All Rights Reserved</p>
-    </footer>   
+    </footer>
     <!-- END OF FOOTER -->
 
-<!-- Optional JavaScript -->
-{% block javascript%}
-<script>
+    <!-- Optional JavaScript -->
+    {% block javascript%}
+    <script>
 
 
-    let menu = document.querySelector('#menu-icon');
-    let navbar = document.querySelector('.navbar');
+        let menu = document.querySelector('#menu-icon');
+        let navbar = document.querySelector('.navbar');
 
-    menu.onclick = () => {
-        menu.classList.toggle('bx-x');
-        navbar.classList.toggle('open');
-    }
-
-
-    // When the user scrolls the page, execute myFunction
-    window.onscroll = function () {
-        myFunction()
-    };
-
-    // Get the navbar
-    var stic = document.getElementById("stic");
-
-    // Get the offset position of the navbar
-    var sticky = stic.offsetTop;
-
-    // Add the sticky class to the navbar when you reach its scroll         position. Remove "sticky" when you leave the scroll position
-    function myFunction() {
-        if (window.pageYOffset >= sticky) {
-            stic.classList.add("sticky")
-        } else {
-            stic.classList.remove("sticky");
+        menu.onclick = () => {
+            menu.classList.toggle('bx-x');
+            navbar.classList.toggle('open');
         }
-    }
 
-</script>
- <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function () {
+            myFunction()
+        };
+
+        // Get the navbar
+        var stic = document.getElementById("stic");
+
+        // Get the offset position of the navbar
+        var sticky = stic.offsetTop;
+
+        // Add the sticky class to the navbar when you reach its scroll         position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                stic.classList.add("sticky")
+            } else {
+                stic.classList.remove("sticky");
+            }
+        }
+
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script crossorigin="anonymous" defer
+    <script crossorigin="anonymous" defer
         integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
         src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"></script>
 
-<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-{% endblock %}
+    <!-- aos script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+
+    {% endblock %}
 </body>
+
 </html>

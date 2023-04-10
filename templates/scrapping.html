@@ -42,6 +42,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  transition: 0.2s;
 }
 .btn a{
   color: #fff;
@@ -50,6 +51,25 @@
 .btn:hover
 {
   color: #fff;
+}
+
+.loader {
+  pointer-events: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #fff;
+  animation: an1 1s ease infinite;
+}
+
+@keyframes an1 {
+  0% {
+    transform: rotate(0turn);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
 }
 
 #Circle {
@@ -122,6 +142,11 @@
         <br />
           <br/>
         <button class="btn">Start Scraping</button>
+        
+        <!-- <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="visually-hidden">Loading...</span>
+        </button> -->
         </form>
       </div>
       <div class="scrape-img">
@@ -171,4 +196,16 @@
           </svg>          
       </div>
     </section>
+
+    {% block javascript%}
+    <script>
+      btn = document.querySelector(".btn");
+
+      btn.onclick = function() {
+        this.innerHTML = "<div class='loader'></div>";
+        setTimeout(() => {
+        }, infinite);
+      }
+    </script>
+    {% endblock %}
 {% endblock %}
