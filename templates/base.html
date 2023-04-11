@@ -1,463 +1,509 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>{{title}}</title>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
 
     <!-- Bootstrap CSS -->
-    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
-          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" rel="stylesheet">
+    <link
+      crossorigin="anonymous"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      rel="stylesheet"
+    />
+    <link
+      crossorigin="anonymous"
+      href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+      integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+      rel="stylesheet"
+    />
     {% block css %}{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
-          rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+      rel="stylesheet"
+    />
 
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;  600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;  600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- aos css -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
-        /* navbar styles */
-        @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+      /* navbar styles */
+      @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            font-family: 'Raleway', sans-serif;
-            text-decoration: none;
-            list-style: none;
-            scroll-behavior: smooth;
-        }
-/*#F8E9A1*/
-/*#F76C6C*/
-/*A8D0E6*/
-/*#374785*/
-/*#24305E*/
-        :root {
-            --bg-color: white;
-            --text-color:#202020;
-                    /*#F172A1;*/
-                    /*#A1C3D1;*/
-            /*--main-color: #F172A1;*/
-            --main-color1: linear-gradient(to right, #A1C3D1, #F172A1);
-            --p-font: 1.2rem;
-            --h2-font: 1.8rem;
-            --big-font: 3.5rem;
-            --btn-color:#F76C6C;
-        }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Raleway", sans-serif;
+        text-decoration: none;
+        list-style: none;
+        scroll-behavior: smooth;
+      }
 
-        body {
-            min-height: 100vh;
-            color: var(--text-color);
+      /*#F8E9A1*/
+      /*#F76C6C*/
+      /*A8D0E6*/
+      /*#374785*/
+      /*#24305E*/
+      :root {
+        --bg-color: #6c63ff;
+        --text-color: #202020;
+        /*#F172A1;*/
+        /*#A1C3D1;*/
+        /*--main-color: #F172A1;*/
+        --main-color1: linear-gradient(to right, #a1c3d1, #f172a1);
+        --p-font: 1.2rem;
+        --h2-font: 1.8rem;
+        --big-font: 3.5rem;
+        --btn-color: #f76c6c;
+      }
 
-        }
+      body {
+        min-height: 100vh;
+        color: var(--text-color);
+        background: white;
+      }
 
+      header {
+        --bg-color: white;
+        position: sticky;
+        width: 100%;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--bg-color);
+        background-image: linear-gradient(315deg, #6c63ff 4%, #b39bc8 74%);
+        padding-right: 12%;
+        padding-left: 12%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        transition: all 0.5s ease;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        margin-top: 0.3rem;
+      }
+
+      .logo i {
+        color: var(--main-color);
+        font-size: 28px;
+        margin-right: 3px;
+      }
+
+      .logo span {
+        color: var(--text-color);
+        font-size: 1.7rem;
+        font-weight: 600;
+      }
+
+      .logo h4 {
+        color: white;
+      }
+
+      ul {
+        margin-bottom: 0;
+      }
+
+      .navbar {
+        font-family: Lato, sans-serif;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+      }
+
+      .navbar a {
+        color: var(--text-color);
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 5px 0;
+        margin: 0px 30px;
+        transition: all 0.5s ease;
+        text-decoration: none;
+      }
+
+      .navbar a:hover {
+        color: var(--main-color);
+      }
+
+      .main {
+        display: flex;
+        align-items: center;
+      }
+
+      .main a {
+        margin-right: 25px;
+        margin-left: 10px;
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.5s ease;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+      }
+
+      .user i {
+        color: var(--main-color);
+        font-size: 28px;
+        margin-right: 7px;
+      }
+
+      .main a:hover {
+        color: var(--main-color);
+      }
+
+      #menu-icon {
+        font-size: 35px;
+        color: var(--text-color);
+        cursor: pointer;
+        z-index: 10001;
+        display: none;
+      }
+
+      @media (max-width: 1280px) {
         header {
-            --bg-color:white;
-            position: sticky;
-            width: 100%;
-            top: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: var(--bg-color);
-            padding-right: 12%;
-            padding-left: 12%;
-            padding-top: 1%;
-            padding-bottom: 1%;
-            transition: all .50s ease;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, .07);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-top: 0.3rem;
-        }
-
-        .logo i {
-            color: var(--main-color);
-            font-size: 28px;
-            margin-right: 3px;
-        }
-
-        .logo span {
-            color: var(--text-color);
-            font-size: 1.7rem;
-            font-weight: 600;
-        }
-
-        ul {
-            margin-bottom: 0;
-        }
-
-        .navbar {
-            font-family: Lato, sans-serif;
-            display: flex;
-            align-items: center;
-            text-transform: uppercase;
-
-
+          padding: 14px 2%;
+          transition: 0.2s;
         }
 
         .navbar a {
+          padding: 5px 0;
+          margin: 0px 20px;
+          text-decoration: none;
+        }
+      }
 
-            color: var(--text-color);
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 5px 0;
-            margin: 0px 30px;
-            transition: all .50s ease;
-            text-decoration: none;
+      @media (max-width: 360px) {
+        #menu-icon {
+          display: block;
+        }
 
+        body {
+          overflow-x: hidden;
+        }
+
+        .navbar {
+          position: absolute;
+          top: 100%;
+          right: 2%;
+          width: 270px;
+          height: 29vh;
+          background-color: #a8d0e6;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          border-radius: 10px;
+          transition: all 0.5s ease;
+        }
+
+        .navbar a {
+          display: block;
+          margin: 12px 0;
+          padding: 0px 25px;
+          transition: all 0.5s ease;
+          text-decoration: none;
+          color: #e64398;
         }
 
         .navbar a:hover {
-            color: var(--main-color);
+          color: #e64398;
+          transform: translateY(5px);
         }
 
-        .main {
-            display: flex;
-            align-items: center;
+        .navbar.open {
+          right: 2%;
+        }
+      }
+
+      /* end of navbar styles */
+
+      /* footer styles */
+      .footer {
+        margin-top: 200px;
+      }
+
+      footer {
+        position: relative;
+        width: 100%;
+        background: #b39bc8;
+        min-height: 100px;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      footer .social_icon,
+      footer .menu {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+        flex-wrap: wrap;
+      }
+
+      footer .social_icon li,
+      footer .menu li {
+        list-style: none;
+      }
+
+      footer .social_icon li a {
+        font-size: 2em;
+        color: var(--text-color);
+        margin: 0 10px;
+        display: inline-block;
+        transition: 0.5s;
+      }
+
+      footer .social_icon li a:hover {
+        transform: translateY(-10px);
+      }
+
+      footer .menu li a {
+        font-size: 1.2em;
+        color: var(--text-color);
+        margin: 0 10px;
+        display: inline-block;
+        text-decoration: none;
+        opacity: 0.75;
+      }
+
+      footer .menu li a:hover {
+        opacity: 1;
+      }
+
+      footer p {
+        color: var(--text-color);
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+      }
+
+      footer .wave {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: url(/static/images/wave4.png);
+        background-size: 1000px 100px;
+      }
+
+      footer .wave#wave1 {
+        z-index: 1000;
+        opacity: 1;
+        bottom: 0;
+        animation: animateWave 4s linear infinite;
+      }
+
+      footer .wave#wave2 {
+        z-index: 999;
+        opacity: 0.5;
+        bottom: 10px;
+        animation: animateWave_02 4s linear infinite;
+      }
+
+      footer .wave#wave3 {
+        z-index: 1000;
+        opacity: 0.2;
+        bottom: 15px;
+        animation: animateWave 3s linear infinite;
+      }
+
+      footer .wave#wave4 {
+        z-index: 999;
+        opacity: 0.7;
+        bottom: 20px;
+        animation: animateWave_02 3s linear infinite;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        width: 37px;
+        margin-right: 0.3rem;
+      }
+
+      .logo h4 {
+        font-size: 1.4rem;
+        margin-top: -5px;
+        letter-spacing: 0.5px;
+        color: #151111;
+      }
+
+      @keyframes animateWave {
+        0% {
+          background-position-x: 1000px;
         }
 
-        .main a {
-            margin-right: 25px;
-            margin-left: 10px;
-            color: var(--text-color);
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all .50s ease;
-            text-decoration: none;
-            text-transform: uppercase;
+        100% {
+          background-position-x: 0px;
+        }
+      }
+
+      @keyframes animateWave_02 {
+        0% {
+          background-position-x: 0px;
         }
 
-        .user {
-            display: flex;
-            align-items: center;
+        100% {
+          background-position-x: 1000px;
         }
+      }
 
-        .user i {
-            color: var(--main-color);
-            font-size: 28px;
-            margin-right: 7px;
-        }
-
-        .main a:hover {
-            color: var(--main-color);
-        }
-
-        #menu-icon {
-            font-size: 35px;
-            color: var(--text-color);
-            cursor: pointer;
-            z-index: 10001;
-            display: none;
-        }
-
-
-        @media (max-width: 1280px) {
-            header {
-                padding: 14px 2%;
-                transition: .2s;
-            }
-
-            .navbar a {
-                padding: 5px 0;
-                margin: 0px 20px;
-                text-decoration: none;
-            }
-        }
-
-
-        @media (max-width: 360px) {
-            #menu-icon {
-                display: block;
-            }
-
-            body {
-                overflow-x: hidden;
-            }
-
-            .navbar {
-                position: absolute;
-                top: 100%;
-                right: 2%;
-                width: 270px;
-                height: 29vh;
-                background-color: #A8D0E6;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                border-radius: 10px;
-                transition: all .50s ease;
-            }
-
-            .navbar a {
-                display: block;
-                margin: 12px 0;
-                padding: 0px 25px;
-                transition: all .50s ease;
-                text-decoration: none;
-                color: #E64398;
-            }
-
-            .navbar a:hover {
-                color: #E64398;
-                transform: translateY(5px);
-            }
-
-            .navbar.open {
-                right: 2%;
-            }
-        }
-
-        /* end of navbar styles */
-
-        /* footer styles */
-        .footer {
-            margin-top: 200px;
-        }
-
-        footer {
-            position: relative;
-            width: 100%;
-            background: #6C63FF;
-            min-height: 100px;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        footer .social_icon,
-        footer .menu {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
-        }
-
-        footer .social_icon li,
-        footer .menu li {
-            list-style: none;
-        }
-
-        footer .social_icon li a {
-            font-size: 2em;
-            color: var(--text-color);
-            margin: 0 10px;
-            display: inline-block;
-            transition: 0.5s;
-        }
-
-        footer .social_icon li a:hover {
-            transform: translateY(-10px);
-        }
-
-        footer .menu li a {
-            font-size: 1.2em;
-            color: var(--text-color);
-            margin: 0 10px;
-            display: inline-block;
-            text-decoration: none;
-            opacity: 0.75;
-        }
-
-        footer .menu li a:hover {
-            opacity: 1;
-        }
-
-        footer p {
-            color: var(--text-color);
-            text-align: center;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        footer .wave {
-            position: absolute;
-            top: -100px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url(/static/images/wave1.png);
-            background-size: 1000px 100px;
-        }
-
-        footer .wave#wave1 {
-            z-index: 1000;
-            opacity: 1;
-            bottom: 0;
-            animation: animateWave 4s linear infinite;
-        }
-
-        footer .wave#wave2 {
-            z-index: 999;
-            opacity: 0.5;
-            bottom: 10px;
-            animation: animateWave_02 4s linear infinite;
-        }
-
-
-        footer .wave#wave3 {
-            z-index: 1000;
-            opacity: 0.2;
-            bottom: 15px;
-            animation: animateWave 3s linear infinite;
-        }
-
-        footer .wave#wave4 {
-            z-index: 999;
-            opacity: 0.7;
-            bottom: 20px;
-            animation: animateWave_02 3s linear infinite;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            width: 37px;
-            margin-right: 0.3rem;
-        }
-
-        .logo h4 {
-            font-size: 1.4rem;
-            margin-top: -5px;
-            letter-spacing: 0.5px;
-            color: #151111;
-        }
-
-        @keyframes animateWave {
-            0% {
-                background-position-x: 1000px;
-            }
-            100% {
-                background-position-x: 0px;
-            }
-        }
-
-        @keyframes animateWave_02 {
-            0% {
-                background-position-x: 0px;
-            }
-            100% {
-                background-position-x: 1000px;
-            }
-        }
-
-        /* end of footer styles */
+      /* end of footer styles */
     </style>
-</head>
-<body>
-<!-- NAVBAR -->
-<header id="stic">
-    <!--        <a style="text-decoration: none;" href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Instant</span></a>-->
-    <div class="logo">
-        <img alt="instant" src="/static/images/mlogo.png"/>
-        <h4>Instant</h4>
-    </div>
+  </head>
 
-        <div class="main">
-            {% if not session.is_auth%}
-                <a href="/" class="user">Sign In</a>
-                <a href="/signup">Register</a>
-            {% else %}
-                <a href="/main">Home</a>
-                <a href="/logout">Sign Out</a>
-            {% endif %}
-        </div>
+  <body>
+    <!-- NAVBAR -->
+    <header id="stic">
+      <!--        <a style="text-decoration: none;" href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Instant</span></a>-->
+      <div class="logo">
+        <img alt="instant" src="/static/images/mlogo1.svg" />
+        <h4 style="color: white">Instant</h4>
+      </div>
+
+      <div class="main">
+        {% if not session.is_auth%}
+        <a href="/" class="user">Sign In</a>
+        <a href="/signup">Register</a>
+        {% else %}
+        <a href="/main">Home</a>
+        <a href="/logout">Sign Out</a>
+        {% endif %}
+      </div>
     </header>
     <!-- END OF NAVBAR -->
-    {% include "notification.html" %}
-    {% block body %}{% endblock %}
-    
+    {% include "notification.html" %} {% block body %}{% endblock %}
+
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="waves">
-            <div class="wave" id="wave1"></div>
-            <div class="wave" id="wave2"></div>
-            <div class="wave" id="wave3"></div>
-            <div class="wave" id="wave4"></div>
-        </div>
-        <ul class="social_icon">
-            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
-            <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
-            <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-            <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
-        </ul>
-        <ul class="menu">
-            <li><a href="#">Home</a></li>
-        </ul>
-        <p>© 2023 Instant | All Rights Reserved</p>
-    </footer>   
+      <div class="waves">
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+      </div>
+      <ul class="social_icon">
+        <li>
+          <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+        </li>
+        <li>
+          <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+        </li>
+        <li>
+          <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+        </li>
+        <li>
+          <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+        </li>
+      </ul>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+      </ul>
+      <p>© 2023 Instant | All Rights Reserved</p>
+    </footer>
     <!-- END OF FOOTER -->
 
-<!-- Optional JavaScript -->
-{% block javascript%}
-<script>
+    <!-- Optional JavaScript -->
+    {% block javascript%}
+    <script>
+      let menu = document.querySelector("#menu-icon");
+      let navbar = document.querySelector(".navbar");
 
+      menu.onclick = () => {
+        menu.classList.toggle("bx-x");
+        navbar.classList.toggle("open");
+      };
 
-    let menu = document.querySelector('#menu-icon');
-    let navbar = document.querySelector('.navbar');
+      // When the user scrolls the page, execute myFunction
+      window.onscroll = function () {
+        myFunction();
+      };
 
-    menu.onclick = () => {
-        menu.classList.toggle('bx-x');
-        navbar.classList.toggle('open');
-    }
+      // Get the navbar
+      var stic = document.getElementById("stic");
 
+      // Get the offset position of the navbar
+      var sticky = stic.offsetTop;
 
-    // When the user scrolls the page, execute myFunction
-    window.onscroll = function () {
-        myFunction()
-    };
-
-    // Get the navbar
-    var stic = document.getElementById("stic");
-
-    // Get the offset position of the navbar
-    var sticky = stic.offsetTop;
-
-    // Add the sticky class to the navbar when you reach its scroll         position. Remove "sticky" when you leave the scroll position
-    function myFunction() {
+      // Add the sticky class to the navbar when you reach its scroll         position. Remove "sticky" when you leave the scroll position
+      function myFunction() {
         if (window.pageYOffset >= sticky) {
-            stic.classList.add("sticky")
+          stic.classList.add("sticky");
         } else {
-            stic.classList.remove("sticky");
+          stic.classList.remove("sticky");
         }
-    }
+      }
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script
+      crossorigin="anonymous"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    ></script>
+    <script
+      crossorigin="anonymous"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    ></script>
+    <script
+      crossorigin="anonymous"
+      defer
+      integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+      src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+    ></script>
 
-</script>
- <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script crossorigin="anonymous" defer
-        integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
-        src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"></script>
+    <script
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+      type="module"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
 
-<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- aos script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
 
-{% endblock %}
-</body>
+    {% endblock %}
+  </body>
 </html>
