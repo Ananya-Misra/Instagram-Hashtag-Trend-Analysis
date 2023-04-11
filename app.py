@@ -232,9 +232,17 @@ def chart():
     fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True, )
     idf = pd.concat(all_insta_tables)
     date_df = idf.groupby('date')['posts'].sum()
-    fig1 = px.ecdf(date_df, date_df.index, 'posts')
-    fig2 = px.bar(df[:50], x='tag', y='date', log_y=True, )
-    out = df.drop(columns=['link', 'page', 'img']).copy()
+    # fig1 = px.ecdf(date_df, date_df.index, 'posts')
+    # fig2 = px.bar(df[:50], x='tag', y='date', log_y=True, )
+    # out = df.drop(columns=['link', 'page', 'img']).copy()
+
+    tagdf = idf.groupby('tag')['posts'].sum().reset_index()
+    tagdf.sort_values(by='posts', ascending=False, inplace=True)
+    fig1 = px.pie(tagdf[:10], 'tag', 'posts')
+
+
+    weekdf = idf.groupby(idf.date.dt.weekday)['tag'].count().reset_index()
+    fig2= px.line(weekdf, 'date', 'tag', title='Posts vs Day of the week')
 
     return render_template('charts.html', out=out.to_html(index=False), figure=fig.to_html(), figure1=fig1.to_html(),
                            figure2=fig2.to_html(),ts = tag_size)
