@@ -1,20 +1,38 @@
 {% extends 'base.html' %}
 
+
 {% block body %}
 <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-<div class="container">
+
+
+<div class="container py-5">
+     <div class="two">
+  <h2>Hashtag Analysis
+  </h2>
+</div>
     <div class="col-md-12 py-5">
         <form method="post">
-            <input max="500" min="10" placeholder="number of tags" step="10" type="number" value="{{ts}}" name="tag_size"> Update range
+            <input max="500" min="10" step="10" type="number" value="{{ts}}" name="tag_size"> Update range
         </form>
         {{figure|safe}}
     </div>
-    <div class="col-md-12 py-5">
-        {{figure1|safe}}
+    <div class="two">
+  <h2>Top 50 hashtags
+  </h2>
+</div>
+    <div class="col-md-12">
+        {{figure3|safe}}
     </div>
-    <div class="col-md-12 py-5">
-        {{figure2|safe}}
+
+    <div class="two">
+  <h2> Posts vs Day of the week
+  </h2>
+</div>
+
+     <div class="col-md-12">
+        {{figure4|safe}}
     </div>
+   
     <div class="row">
         <div class="col-md-12 mx-auto">
             <!--            for safety-->
@@ -22,6 +40,7 @@
         </div>
 
     </div>
+    
 </div>
 {% endblock %}
 {% block javascript%}
