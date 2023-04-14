@@ -105,7 +105,7 @@
 
 {% block body %}
     <section class="scrape" id="scrape">
-      <div class="scrape-text">
+      <div class="scrape-text" data-aos="fade-right">
         <h1>Step 2</h1>
         <p>
           To start scraping data from Instagram for a trending hashtag, please
@@ -149,7 +149,7 @@
         </button> -->
         </form>
       </div>
-      <div class="scrape-img">
+      <div class="scrape-img" data-aos="fade-left">
         <svg width="642" height="627" viewBox="0 0 642 627" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="New Text Document 1" clip-path="url(#clip0_1_2)">
           <g id="Circle">
@@ -206,6 +206,22 @@
         setTimeout(() => {
         }, infinite);
       }
+    </script>
+
+    <!-- footer social icons -->
+    <script
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    type="module"
+    ></script>
+    <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <!-- aos script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
     </script>
     {% endblock %}
 {% endblock %}

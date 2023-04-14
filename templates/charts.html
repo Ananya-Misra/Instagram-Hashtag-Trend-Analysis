@@ -6,35 +6,35 @@
 
 
 <div class="container py-5">
-     <div class="two">
+     <div class="two" data-aos="fade-right">
   <h2>Hashtag Analysis
   </h2>
 </div>
-    <div class="col-md-12 py-5">
+    <div class="col-md-12 py-5" data-aos="fade-left">
         <form method="post">
             <input max="500" min="10" step="10" type="number" value="{{ts}}" name="tag_size"> Update range
         </form>
         {{figure|safe}}
     </div>
-    <div class="two">
+    <div class="two" data-aos="fade-right">
   <h2>Top 50 hashtags
   </h2>
 </div>
-    <div class="col-md-12">
+    <div class="col-md-12" data-aos="zoom-in">
         {{figure3|safe}}
     </div>
 
-    <div class="two">
+    <div class="two" data-aos="fade-right">
   <h2> Posts vs Day of the week
   </h2>
 </div>
 
-     <div class="col-md-12">
+     <div class="col-md-12" data-aos="fade-up-left">
         {{figure4|safe}}
     </div>
-   
+   <br><br>
     <div class="row">
-        <div class="col-md-12 mx-auto">
+        <div class="col-md-12 mx-auto" data-aos="fade-right">
             <!--            for safety-->
             {{out|safe}}
         </div>
@@ -54,5 +54,21 @@
             responsive: true
         });
     })
+</script>
+
+<!-- footer social icons -->
+<script
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+      type="module"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+<!-- aos script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
 </script>
 {%endblock%}
