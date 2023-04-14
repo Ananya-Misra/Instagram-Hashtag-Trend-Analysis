@@ -1,9 +1,7 @@
 # twilightqueenbee1579
 # !$@%67
-import pandas as pd
-from selenium import webdriver
 
-""" from webdriver_manager.chrome import ChromeDriverManager """
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup

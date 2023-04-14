@@ -1,13 +1,10 @@
 import json
-
-from utils import validate_email
-
 import plotly.express as px
 from flask import Flask, session, flash, redirect, render_template
 from flask.globals import request
 from sqlalchemy.orm import sessionmaker
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-
 from bot2 import *
 from project_orm import User
 from utils import *
@@ -15,9 +12,6 @@ from utils import *
 # login page
 app = Flask(__name__)
 app.secret_key = "the basics of life with python"
-
-
-# %%
 
 
 def sql_fetch():
@@ -66,7 +60,6 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         cpassword = request.form.get('cpassword')
-        print("niceeeeeeeeeeeeeeeeee")
         if name and len(name) >= 3:
             if email and validate_email(email):
                 if password and len(password) >= 6:
@@ -118,7 +111,6 @@ def check_credentials():
         flash('Successful', 'success')
         return redirect('/scrape')
     flash('Wrong Credentials', 'warning')
-    print("Hellll nooooooooooooooooooooo")
     time.sleep(3)
     return redirect('/main')
 
@@ -126,10 +118,8 @@ def check_credentials():
 @app.route('/main', methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
-        print('ellllllllllllllllllllllllllllllll')
         username = request.form.get("username")
         password = request.form.get("password")
-
         if username and password:
             session['insta_username'] = username
             session['insta_password'] = password
@@ -144,13 +134,11 @@ def scrape():
     print("Its scrape timee 1-1")
     if 'is_auth' not in session or session['is_auth'] != True:
         flash('Wrong credentials', 'danger')
-
         return redirect('/main')
     if request.method == 'POST':
         scroll = int(request.form.get('scroll'))
         sleeptime = int(request.form.get('sleep'))
         time.sleep(sleeptime)
-        print("Its scrape timeeeeeeeeeeeeeee", scroll)
         # if login successful
         try:
             mdriver = webdriver.Chrome(ChromeDriverManager().install())
@@ -210,16 +198,8 @@ def line_chart():
                            labels=labels, max=17000)
 
 
-# @app.route('/visual')
-# def chart():
-#     df=sqlToDf('hashtag_'+session['tableName'])
-
-
 @app.route('/chart', methods=['GET', 'POST'])
 def chart():
-    # Define Plot Data
-    # 'hashtag__04_03_23'
-    # option = request.form.get("range")
     if request.method == 'POST':
         tag_size = request.form.get('tag_size')
     else:
@@ -239,8 +219,6 @@ def chart():
     tagdf = idf.groupby('tag')['posts'].sum().reset_index()
     tagdf.sort_values(by='posts', ascending=False, inplace=True)
     fig3 = px.pie(tagdf[:10], 'tag', 'posts')
-
-
     weekdf = idf.groupby(idf.date.dt.weekday)['tag'].count().reset_index()
     fig4= px.line(weekdf, 'date', 'tag')
 
