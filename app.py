@@ -209,13 +209,14 @@ def chart():
         all_insta_tables.append(sqlToDf(name))
     df = pd.concat(all_insta_tables)
     df.sort_values(by='posts', ascending=False, inplace=True)
-    fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True, )
+    df.drop_duplicates(subset=['tag'], inplace=True)
+    fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True )
     idf = pd.concat(all_insta_tables)
     date_df = idf.groupby('date')['posts'].sum()
     fig1 = px.ecdf(date_df, date_df.index, 'posts')
     fig2 = px.bar(df[:50], x='tag', y='date', log_y=True, )
     out = df.drop(columns=['link', 'page', 'img']).copy()
-
+    out.sort_values(by='date', ascending=True, inplace=True)
     tagdf = idf.groupby('tag')['posts'].sum().reset_index()
     tagdf.sort_values(by='posts', ascending=False, inplace=True)
     fig3 = px.pie(tagdf[:10], 'tag', 'posts')
@@ -227,4 +228,4 @@ def chart():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
