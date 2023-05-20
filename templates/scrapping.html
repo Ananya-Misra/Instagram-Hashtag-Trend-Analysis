@@ -107,7 +107,7 @@
 
 </style>
 
-{%endblock%}
+{% endblock %}
 
 {% block body %}
 <section class="scrape" id="scrape">
@@ -248,8 +248,9 @@
         </svg>
     </div>
 </section>
+{% endblock %}
 
-{% block javascript%}
+{% block javascript %}
 <script>
     btn = document.querySelector(".btn");
     var sleep = document.querySelector("#sleep").value
@@ -280,5 +281,4 @@
 <script>
     AOS.init();
 </script>
-{% endblock %}
 {% endblock %}

@@ -1,11 +1,16 @@
 import json
+import sqlite3
+
+import pandas as pd
 import plotly.express as px
 from flask import Flask, session, flash, redirect, render_template
 from flask.globals import request
-from sqlalchemy.orm import sessionmaker
 from selenium import webdriver
+from sqlalchemy.orm import sessionmaker
 from webdriver_manager.chrome import ChromeDriverManager
-from bot2 import *
+
+from bot2 import time, login, skip_login_info, scroller, insta_posts, getdata, covert_data_to_df, convert_df_to_csv, \
+    save_dataframe, insertColPost, readSqliteTable, sqlToDf, create_engine
 from project_orm import User
 from utils import *
 
@@ -146,7 +151,7 @@ def scrape():
             time.sleep(sleeptime)
             login(mdriver, session['insta_username'], session['insta_password'], sleeptime)
             skip_login_info(mdriver, sleeptime)
-            turn_off_notif(mdriver, sleeptime)
+            # turn_off_notif(mdriver, sleeptime)
             mdriver.get("https://www.instagram.com/explore")
             # set_window_size(mdriver)
             scroller(mdriver, 0, sleeptime)
@@ -210,7 +215,7 @@ def chart():
     df = pd.concat(all_insta_tables)
     df.sort_values(by='posts', ascending=False, inplace=True)
     df.drop_duplicates(subset=['tag'], inplace=True)
-    fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True )
+    fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True)
     idf = pd.concat(all_insta_tables)
     date_df = idf.groupby('date')['posts'].sum()
     fig1 = px.ecdf(date_df, date_df.index, 'posts')
@@ -220,11 +225,12 @@ def chart():
     tagdf = idf.groupby('tag')['posts'].sum().reset_index()
     tagdf.sort_values(by='posts', ascending=False, inplace=True)
     fig3 = px.pie(tagdf[:10], 'tag', 'posts')
-    weekdf = idf.groupby(idf.date.dt.weekday)['tag'].count().reset_index()
-    fig4= px.line(weekdf, 'date', 'tag')
+
+    weekdf = idf.groupby(idf.date.dt.day_name())['tag'].count().reset_index()
+    fig4 = px.line(weekdf, 'date', 'tag')
 
     return render_template('charts.html', out=out.to_html(index=False), figure=fig.to_html(), figure1=fig1.to_html(),
-                           figure2=fig2.to_html(),ts = tag_size,  figure3=fig3.to_html(),  figure4=fig4.to_html(),)
+                           figure2=fig2.to_html(), ts=tag_size, figure3=fig3.to_html(), figure4=fig4.to_html(), )
 
 
 if __name__ == "__main__":
