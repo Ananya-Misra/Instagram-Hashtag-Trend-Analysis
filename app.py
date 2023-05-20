@@ -8,14 +8,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bot2 import *
 from project_orm import User
 from utils import *
-
+import pandas as pd
 # login page
 app = Flask(__name__)
 app.secret_key = "the basics of life with python"
 
 
 def sql_fetch():
-    con = sqlite3.connect('hashtags.sqlite3')
+    con = sqlite3.connect(r'./hashtags.sqlite3')
     cursorObj = con.cursor()
     cursorObj.execute('SELECT name from sqlite_master where type= "table"')
     return [name[0] for name in cursorObj.fetchall() if '__' in name[0]]
@@ -146,8 +146,8 @@ def scrape():
             time.sleep(sleeptime)
             login(mdriver, session['insta_username'], session['insta_password'], sleeptime)
             skip_login_info(mdriver, sleeptime)
-            turn_off_notif(mdriver, sleeptime)
-            mdriver.get("https://www.instagram.com/explore")
+            # turn_off_notif(mdriver, sleeptime)
+            mdriver.get("https://www.instagram.csom/explore")
             # set_window_size(mdriver)
             scroller(mdriver, 0, sleeptime)
             time.sleep(sleeptime + 1)
@@ -201,12 +201,15 @@ def line_chart():
 @app.route('/chart', methods=['GET', 'POST'])
 def chart():
     if request.method == 'POST':
-        tag_size = request.form.get('tag_size')
+        tag_size = request.form.get('tag_sifze')
     else:
         tag_size = 50
     all_insta_tables = []
+    print(sql_fetch())
     for name in sql_fetch():
         all_insta_tables.append(sqlToDf(name))
+        print(name+" --------------------------------------")
+    print(all_insta_tables)
     df = pd.concat(all_insta_tables)
     df.sort_values(by='posts', ascending=False, inplace=True)
     fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True, )
@@ -216,6 +219,7 @@ def chart():
     fig2 = px.bar(df[:50], x='tag', y='date', log_y=True, )
     out = df.drop(columns=['link', 'page', 'img']).copy()
 
+    out.sort_values(by='date', ascending=True, inplace=True)
     tagdf = idf.groupby('tag')['posts'].sum().reset_index()
     tagdf.sort_values(by='posts', ascending=False, inplace=True)
     fig3 = px.pie(tagdf[:10], 'tag', 'posts')

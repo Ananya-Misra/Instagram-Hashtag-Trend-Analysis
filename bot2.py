@@ -40,8 +40,9 @@ def login(driver, instahandle, instapassword, sleeptime):
 def skip_login_info(driver, sleeptime):
     # save your login info?
     time.sleep(sleeptime)
-    notnow = driver.find_element("xpath", "//div[contains(text(), 'Not Now')]").click()
-
+    # print(//div[@class='_ac8f']//div[contains(text(), 'Not now')]").click())
+    notnow = driver.find_element("xpath", "/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/div[2]/section/main/div/div/div/div/div")
+#
 
 def turn_off_notif(driver, sleeptime):
     # turn on notif
