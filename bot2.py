@@ -1,15 +1,14 @@
 # twilightqueenbee1579
 # !$@%67
 
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup
 import time
-from sqlalchemy import create_engine
-import sqlite3
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+from bs4 import BeautifulSoup
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from sqlalchemy import create_engine
 
 
 # --------------------------------------------- **BOT 1---------------------------------------------------------**
@@ -17,13 +16,16 @@ import numpy as np
 # check_credentials
 def check_credentials(driver):
     try:
-       driver.find_element("xpath", "//p[contains(text(), 'Sorry, your password was incorrect. Please double-check your password.')]")
-       present = False
-       print("error")
+        driver.find_element("xpath",
+                            "//p[contains(text(), 'Sorry, your password was incorrect. Please double-check your password.')]")
+        present = False
+        print("error")
     except Exception as e:
-       print("yess")
-       present = True
+        print("yess")
+        present = True
     return present
+
+
 # login
 def login(driver, instahandle, instapassword, sleeptime):
     username = driver.find_element(By.CSS_SELECTOR, "input[name='username']")
@@ -40,13 +42,16 @@ def login(driver, instahandle, instapassword, sleeptime):
 def skip_login_info(driver, sleeptime):
     # save your login info?
     time.sleep(sleeptime)
-    notnow = driver.find_element("xpath", "//div[contains(text(), 'Not Now')]").click()
+
+    notnow = driver.find_element(By.CSS_SELECTOR, "._ac8f>div")
 
 
-def turn_off_notif(driver, sleeptime):
-    # turn on notif
-    time.sleep(sleeptime)
-    notnow2 = driver.find_element("xpath", "//button[contains(text(), 'Not Now')]").click()
+#
+
+# def turn_off_notif(driver, sleeptime):
+#     # turn on notif
+#     time.sleep(sleeptime)
+#     notnow2 = driver.find_element("xpath", "//button[contains(text(), 'Not Now')]").click()
 
 
 # searchbox
@@ -266,15 +271,15 @@ def readSqliteTable(tableName, driver, sleeptime):
 
 def sqlToDf(tableName):
     conn = sqlite3.connect('hashtags.sqlite3')
-    sql_query = pd.read_sql_query (f'''
+    sql_query = pd.read_sql_query(f'''
                                    SELECT * FROM {tableName}
                                    ''', conn)
-    df = pd.DataFrame(sql_query, columns = ['tag', 'link','page','date','img', 'posts'])
-    df['date']= pd.to_datetime(df['date'])
-    df['posts'] = df['posts'].replace(',','',regex=True)
+    df = pd.DataFrame(sql_query, columns=['tag', 'link', 'page', 'date', 'img', 'posts'])
+    df['date'] = pd.to_datetime(df['date'])
+    df['posts'] = df['posts'].replace(',', '', regex=True)
     df = df.replace('None', np.nan).dropna()
     df['posts'] = df['posts'].astype(float)
-    df=df.dropna()
+    df = df.dropna()
     return df
 
 # -------------------------***Calling Functions***
