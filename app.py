@@ -119,6 +119,9 @@ def check_credentials():
     time.sleep(3)
     return redirect('/main')
 
+@app.route('/policy')
+def policy():
+    return render_template('policy.html', title='Policy')
 
 @app.route('/main', methods=['GET', 'POST'])
 def main():

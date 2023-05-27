@@ -256,13 +256,10 @@
     var sleep = document.querySelector("#sleep").value
     btn.onclick = function () {
         sleep = parseInt(sleep)
-        if (sleep >= 3) {
+
             this.innerHTML = "<div class='loader'></div>";
             setTimeout(() => {
             }, infinite);
-        } else {
-            alert("sleep value must be greater than 2")
-        }
     }
 </script>
 

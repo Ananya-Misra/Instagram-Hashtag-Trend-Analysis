@@ -414,10 +414,9 @@
       </div>
 
       <div class="main">
-        {% if not session.is_auth%}
-        <a href="/" class="user">Sign In</a>
-        {% else %}
+        {% if session.is_auth%}
         <a href="/main">Home</a>
+         <a href="/policy">Policy</a>
         <a href="/logout">Sign Out</a>
         {% endif %}
       </div>
