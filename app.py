@@ -1,5 +1,6 @@
 import json
 import sqlite3
+from datetime import datetime
 
 import pandas as pd
 import plotly.express as px
@@ -47,7 +48,6 @@ def index():
                     session['id'] = user.id
                     session['username'] = user.name
                     session['is_auth'] = True
-                    flash('Login successful', 'success')
                     return redirect('/main')
                 else:
                     flash("Invalid Password", 'danger')
@@ -110,7 +110,6 @@ def check_credentials():
     mdriver = webdriver.Chrome(ChromeDriverManager().install())
     mdriver.get("https://www.instagram.com/")
     time.sleep(4)
-    print(session.items())
     if (login(mdriver, session['insta_username'], session['insta_password'], 3)):
         session['is_auth'] = True
         flash('Successful', 'success')
@@ -119,12 +118,17 @@ def check_credentials():
     time.sleep(3)
     return redirect('/main')
 
+
 @app.route('/policy')
 def policy():
     return render_template('policy.html', title='Policy')
 
+
 @app.route('/main', methods=['GET', 'POST'])
 def main():
+    if 'is_auth' not in session or session['is_auth'] != True:
+        flash('Please login to continue', 'info')
+        return redirect('/')
     if request.method == 'POST':
         username = request.form.get("username")
         password = request.form.get("password")
@@ -139,10 +143,9 @@ def main():
 
 @app.route('/scrape', methods=['GET', 'POST'])
 def scrape():
-    print("Its scrape timee 1-1")
     if 'is_auth' not in session or session['is_auth'] != True:
         flash('Wrong credentials', 'danger')
-        return redirect('/main')
+        return redirect('/')
     if request.method == 'POST':
         scroll = int(request.form.get('scroll'))
         sleeptime = int(request.form.get('sleep'))
@@ -159,20 +162,15 @@ def scrape():
             # set_window_size(mdriver)
             scroller(mdriver, 0, sleeptime)
             time.sleep(sleeptime + 1)
-            fetched_posts = insta_posts(mdriver, scroll, sleeptime + 2)
-            print(fetched_posts)
+            fetched_posts = insta_posts(mdriver, sleeptime + 2, scroll)
             print(f'len of posts {len(fetched_posts)}')
             fetched_data = getdata(mdriver, fetched_posts, sleeptime)
-            print("The time for fetched data has come...................=^^=")
-            print(fetched_data)
             dataframe = covert_data_to_df(fetched_data)
             convert_df_to_csv(dataframe)
-            print(dataframe)
             tableName = save_dataframe(dataframe)
             mdriver = webdriver.Chrome(ChromeDriverManager().install())
             insertColPost("hashtag_" + tableName)
             readSqliteTable("hashtag_" + tableName, mdriver, sleeptime)
-            print("hashtag_" + tableName)
             return redirect('/chart')
         except Exception as e:
             print(e)
@@ -218,7 +216,9 @@ def chart():
     df = pd.concat(all_insta_tables)
     df.sort_values(by='posts', ascending=False, inplace=True)
     df.drop_duplicates(subset=['tag'], inplace=True)
-    fig = px.bar(df[:int(tag_size)], x='tag', y='posts', log_y=True)
+    current_mon = int(datetime.strftime(datetime.now(), '%m'))
+    curr_df = df[df['date'].dt.month == current_mon]
+    fig = px.bar(curr_df[:int(tag_size)], x='tag', y='posts', log_y=True)
     idf = pd.concat(all_insta_tables)
     date_df = idf.groupby('date')['posts'].sum()
     fig1 = px.ecdf(date_df, date_df.index, 'posts')
@@ -227,7 +227,7 @@ def chart():
     out.sort_values(by='date', ascending=True, inplace=True)
     tagdf = idf.groupby('tag')['posts'].sum().reset_index()
     tagdf.sort_values(by='posts', ascending=False, inplace=True)
-    fig3 = px.pie(tagdf[:10], 'tag', 'posts')
+    fig3 = px.pie(tagdf[:15], 'tag', 'posts', width=1000, height=600)
 
     weekdf = idf.groupby(idf.date.dt.day_name())['tag'].count().reset_index()
     fig4 = px.line(weekdf, 'date', 'tag')
@@ -237,4 +237,4 @@ def chart():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

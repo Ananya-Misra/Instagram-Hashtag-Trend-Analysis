@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from sqlalchemy import create_engine
+from datetime import datetime
 
 
 # --------------------------------------------- **BOT 1---------------------------------------------------------**
@@ -21,7 +22,6 @@ def check_credentials(driver):
         present = False
         print("error")
     except Exception as e:
-        print("yess")
         present = True
     return present
 
@@ -106,7 +106,6 @@ def insta_posts(driver, sleeptime, limit=10):
         if '/p/' in post:
             posts.append(post)
             limit -= 1
-
     return posts
 
 
@@ -134,6 +133,7 @@ def getdata(driver, posts, sleeptime):
                             'page': soup.find('a').attrs.get('href'),
                             'date': soup.find('time').attrs.get('datetime'),
                             'img': soup.find('img').attrs.get('src')
+                            # 'scraped_on': datetime.now(),
                         })
                     print(raw_data)
             else:

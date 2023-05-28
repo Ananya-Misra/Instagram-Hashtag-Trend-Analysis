@@ -252,14 +252,24 @@
 
 {% block javascript %}
 <script>
-    btn = document.querySelector(".btn");
-    var sleep = document.querySelector("#sleep").value
+    let btn = document.querySelector(".btn");
+    let scroll=document.querySelector("#scroll")
+    let sleep = document.querySelector("#sleep")
+    btn.disabled = true
+    sleep.addEventListener("change", (e) => {
+        let value = sleep.value;
+        console.log(value)
+        console.log(value === 3)
+        if (parseInt(value) >= 3 ) {
+            btn.disabled = false;
+        } else {
+            btn.disabled = true
+        }
+    })
     btn.onclick = function () {
-        sleep = parseInt(sleep)
-
-            this.innerHTML = "<div class='loader'></div>";
-            setTimeout(() => {
-            }, infinite);
+        this.innerHTML = "<div class='loader'></div>";
+        setTimeout(() => {
+        }, infinite);
     }
 </script>
 
