@@ -26,7 +26,7 @@
     }
 
     section {
-        padding: 80px 8%;
+        padding: 20px 8%;
     }
 
     .home {
@@ -34,14 +34,20 @@
         min-height: 100vh;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1rem;
+        grid-gap: 1.4rem;
         align-items: center;
     }
-
+    #home{
+        padding: 40px 8% 0 8%;
+    }
+.home-img{
+display: flex;
+justify-content: center;}
     .home-img svg {
-        display: flex;
-        height: auto;
-        width: 520px;
+
+        max-width: 100%;
+    width: 580px;
+    height: auto;
     }
 
     .home-text {
@@ -58,7 +64,9 @@
         margin: 1rem 0 2rem;
         line-height: 1.5;
     }
-
+   #about{
+       padding: 90px 2%;
+   }
     .btn {
         background-color: var(--text-color);
         border: none;
@@ -111,6 +119,7 @@
         grid-template-columns: repeat(auto-fit, minmax(220px, auto));
         grid-gap: 1.5rem;
         align-items: center;
+        overflow-y: hidden;
     }
 
     .box {
@@ -191,12 +200,6 @@
         }
     }
 
-    @media (max-width: 1140px) {
-        section {
-            padding: 50px 8%;
-        }
-
-    }
 
 
     body {
@@ -227,7 +230,7 @@
     .container {
         /*width: 1100px;*/
         max-width: 100%;
-        margin: 0 auto;
+        margin: 0;
         display: grid;
         padding: 20px;
     }
@@ -307,6 +310,7 @@
     .container .box .textbox {
         margin-top: 10px;
         margin-bottom: 5px;
+        height:190px;
     }
 
     .container .box .textbox h1 {
@@ -318,6 +322,7 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+        overflow-y: hidden;
     }
 
     @media only screen and (max-width: 1090px) {
@@ -356,11 +361,58 @@
     @keyframes two-leaves {
         from {
             transform: rotateZ(0deg);
+
         }
         to {
             transform: rotateZ(-15deg);
         }
     }
+
+     @media  only screen and  (max-width:1285px)
+   {
+
+       .about-text-two p{
+           font-size: 1.4rem;
+
+       }
+         .about-text-two h1{
+             font-size: .5rem;
+
+         }
+   }
+    @media  only screen and (max-width:1156px)
+    {
+         .about-text-two p{
+           font-size: 1.5rem;
+
+       }
+         .about-text-one{
+             display: flex;
+             align-items: center;
+         }
+        .about{
+            grid-template-rows: repeat(2, 2fr);
+            grid-template-columns: 1fr;
+            grid-gap: 0;
+        }
+    }
+    @media only screen and (max-width:1075px) {
+
+      .insta, .home {
+    display: grid;
+            grid-template-columns: none;
+    grid-template-rows: repeat(1, 1fr);
+  }
+
+   .home div:nth-of-type(1) {
+    order: 2;
+  }
+
+  .home:nth-of-type(2) {
+    order: 1;
+  }
+    }
+
 
 </style>
 {% endblock %}
@@ -368,9 +420,9 @@
 
 
 <!-- home starts -->
-<section class="home" id="home">
-
-    <div class="home-img" data-aos="fade-left"
+<section id="home">
+   <div class="home">
+           <div class="home-img" data-aos="fade-left"
          data-aos-anchor="#example-anchor"
          data-aos-duration="500"
          data-aos-offset="500">
@@ -456,6 +508,7 @@
         <br/>
         <button class="btn"><a href="#insta-text">Get Started</a></button>
     </div>
+   </div>
 </section>
 
 
@@ -485,6 +538,11 @@
 <br><br>
 
 <section>
+    <div class="heading" data-aos="fade-down"
+     data-aos-duration="3000">
+    <h1>Insta Login</h1>
+    <br><br>
+</div>
     <div class="insta">
         <div class="insta-img" data-aos="fade-right"
              data-aos-duration="1500"

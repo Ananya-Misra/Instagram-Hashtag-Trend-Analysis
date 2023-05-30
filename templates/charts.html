@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
-
+{% block css %}
+<style>
+    .dataTables_wrapper{
+        overflow-x: scroll;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
 <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -17,7 +23,7 @@
         {{figure|safe}}
     </div>
     <div class="two" data-aos="fade-right">
-  <h2>Top 15 Hashtags
+  <h2>Top 10 Hashtags
   </h2>
 </div>
     <div class="col-md-12" data-aos="zoom-in">
@@ -35,7 +41,7 @@
    <br><br>
     <div class="row">
         <div class="col-md-12 mx-auto" data-aos="fade-right">
-            <!--            for safety-->
+            <!--for safety-->
             {{out|safe}}
         </div>
 
