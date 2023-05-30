@@ -73,29 +73,26 @@ def scroller(driver, timeout, sleeptime):
     while not match:
         last_count = scrolldown
         time.sleep(sleeptime)
+        print(timeout, 'scroll time')
         scrolldown = driver.execute_script(
             "window.scrollTo(0, document.body.scrollHeight);var scrolldown=document.body.scrollHeight;return scrolldown;")
         if last_count == scrolldown:
             match = True
-        if timeout == 0:
+        if timeout == 1:
             break
         else:
             timeout -= 1
 
 
-def insta_posts(driver, sleeptime, limit=10):
+def insta_posts(driver, sleeptime):
     posts = []
     links = driver.find_elements(By.TAG_NAME, 'a')
     for link in links:
         post = link.get_attribute('href')
         print(link)
         print(post)
-        print(limit)
-        if limit == 0:
-            break
         if '/p/' in post:
             posts.append(post)
-            limit -= 1
     return posts
 
 
@@ -147,41 +144,7 @@ def convert_df_to_csv(df):
     print('Process Completed')
 
 
-# --------------------- **Calling functions*-------------------*
-#
-# #installing driver
-# mdriver = webdriver.Chrome(ChromeDriverManager().install())
-# mdriver.get("https://www.instagram.com/")
-# time.sleep(4)
-# insta_handle='twilightqueenbee1579'
-# insta_password='!$@%67'
-# insta_page='random_shotsbyme'
-# #if login successful
-# try:
-#     if login(mdriver,insta_handle,insta_password,3):
-#         print("Login successful")
-#         skip_login_info(mdriver,3)
-#         turn_off_notif(mdriver,2)
-#         mdriver.get("https://www.instagram.com/explore")
-#         # set_window_size(mdriver)
-#         scroller(mdriver,0,3)
-#         time.sleep(3)
-#         fetched_posts=insta_posts(mdriver, 20, 3)
-#         print(fetched_posts)
-#         print(f'len of posts {len(fetched_posts)}')
-#         fetched_data=getdata(mdriver,fetched_posts,insta_page)
-#         print("The time for fetched data has come...................=^^=")
-#         print(fetched_data)
-#         dataframe=covert_data_to_df(fetched_data)
-#         convert_df_to_csv(dataframe)
-#         print(dataframe)
-#     else:
-#         print("Wrong credentials")
-# except Exception as e:
-#      print(e)
-#
-# # mdriver.quit()
-# print(dataframe)
+
 # ---------------------------------------------**BOT 2**-----------------------------------------
 
 from datetime import datetime

@@ -1,7 +1,5 @@
-import json
 import sqlite3
 from datetime import datetime
-
 import pandas as pd
 import plotly.express as px
 from flask import Flask, session, flash, redirect, render_template
@@ -9,8 +7,7 @@ from flask.globals import request
 from selenium import webdriver
 from sqlalchemy.orm import sessionmaker
 from webdriver_manager.chrome import ChromeDriverManager
-
-from bot2 import time, login, skip_login_info, scroller, insta_posts, getdata, covert_data_to_df, convert_df_to_csv, \
+from bot import time, login, skip_login_info, scroller, insta_posts, getdata, covert_data_to_df, convert_df_to_csv, \
     save_dataframe, insertColPost, readSqliteTable, sqlToDf, create_engine
 from project_orm import User
 from utils import *
@@ -95,11 +92,6 @@ def signup():
     return render_template('index.html', title='Register')
 
 
-@app.route('/forgot', methods=['GET', 'POST'])
-def forgot():
-    return render_template('forgot.html', title='Forgot Password')
-
-
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     return render_template('home.html', title='Home')
@@ -157,12 +149,10 @@ def scrape():
             time.sleep(sleeptime)
             login(mdriver, session['insta_username'], session['insta_password'], sleeptime)
             skip_login_info(mdriver, sleeptime)
-            # turn_off_notif(mdriver, sleeptime)
             mdriver.get("https://www.instagram.com/explore")
-            # set_window_size(mdriver)
-            scroller(mdriver, 0, sleeptime)
+            scroller(mdriver, scroll, sleeptime)
             time.sleep(sleeptime + 1)
-            fetched_posts = insta_posts(mdriver, sleeptime + 2, scroll)
+            fetched_posts = insta_posts(mdriver, sleeptime)
             print(f'len of posts {len(fetched_posts)}')
             fetched_data = getdata(mdriver, fetched_posts, sleeptime)
             dataframe = covert_data_to_df(fetched_data)
@@ -191,19 +181,6 @@ def logout():
     return redirect('/')
 
 
-@app.route('/visualize')
-def line_chart():
-    """
-  Doing a bunch of python
-  Using a small example data set.
-  """
-
-    data = json.dumps([1.0, 2.0, 3.0])
-    labels = json.dumps(["12-31-18", "01-01-19", "01-02-19"])
-    return render_template("visualization.html", data=data,
-                           labels=labels, max=17000)
-
-
 @app.route('/chart', methods=['GET', 'POST'])
 def chart():
     if request.method == 'POST':
@@ -224,11 +201,10 @@ def chart():
     fig1 = px.ecdf(date_df, date_df.index, 'posts')
     fig2 = px.bar(df[:50], x='tag', y='date', log_y=True, )
     out = df.drop(columns=['link', 'page', 'img']).copy()
-    out.sort_values(by='date', ascending=True, inplace=True)
+    out.sort_values(by='date', ascending=False, inplace=True)
     tagdf = idf.groupby('tag')['posts'].sum().reset_index()
     tagdf.sort_values(by='posts', ascending=False, inplace=True)
     fig3 = px.pie(tagdf[:10], 'tag', 'posts');
-
     weekdf = idf.groupby(idf.date.dt.day_name())['tag'].count().reset_index()
     fig4 = px.line(weekdf, 'date', 'tag')
 

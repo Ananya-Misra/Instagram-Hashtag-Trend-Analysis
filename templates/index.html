@@ -46,7 +46,9 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
+ form{
+     overflow: visible;
+ }
     .forms-wrap {
         position: absolute;
         height: 100%;
@@ -70,7 +72,11 @@
         grid-column: 1 / 2;
         grid-row: 1 / 2;
         transition: opacity 0.02s 0.4s;
+        overflow: visible;
     }
+        .actual-form{
+            overflow: visible;
+        }
 
     form.sign-up-form {
         opacity: 0;
@@ -92,6 +98,7 @@
         margin-top: -9px;
         letter-spacing: -0.5px;
         color: #151111;
+        margin-top: 2px;
     }
 
     .heading h2 {
@@ -123,6 +130,7 @@
         position: relative;
         height: 37px;
         margin-bottom: 2rem;
+        overflow: visible;
     }
 
     .input-field {

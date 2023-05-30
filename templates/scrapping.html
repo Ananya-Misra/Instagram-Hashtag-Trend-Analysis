@@ -155,7 +155,7 @@
             Additionally, it is important to set a sleep time between each scroll
             to avoid being flagged as a bot by Instagram. Please specify the
             number of seconds you would like the script to wait before scrolling
-            down again. A safe range for sleep time is typically between 1-5
+            down again. A safe range for sleep time is typically between 3-5
             seconds.
         </p>
         <form method="post">
@@ -291,16 +291,16 @@
     let scroll=document.querySelector("#scroll")
     let sleep = document.querySelector("#sleep")
     btn.disabled = true
-    sleep.addEventListener("change", (e) => {
-        let value = sleep.value;
-        console.log(value)
-        console.log(value === 3)
-        if (parseInt(value) >= 3 ) {
-            btn.disabled = false;
-        } else {
-            btn.disabled = true
-        }
-    })
+    const checkEnableButton = () => {
+ btn.disabled = !(
+      sleep.value>=3 &&
+      scroll.value >0)
+
+}
+
+sleep.addEventListener('change', checkEnableButton)
+scroll.addEventListener('change', checkEnableButton)
+
     btn.onclick = function () {
         this.innerHTML = "<div class='loader'></div>";
         setTimeout(() => {
