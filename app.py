@@ -227,7 +227,7 @@ def chart():
     out.sort_values(by='date', ascending=True, inplace=True)
     tagdf = idf.groupby('tag')['posts'].sum().reset_index()
     tagdf.sort_values(by='posts', ascending=False, inplace=True)
-    fig3 = px.pie(tagdf[:15], 'tag', 'posts', width=1000, height=600)
+    fig3 = px.pie(tagdf[:10], 'tag', 'posts');
 
     weekdf = idf.groupby(idf.date.dt.day_name())['tag'].count().reset_index()
     fig4 = px.line(weekdf, 'date', 'tag')

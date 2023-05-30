@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 {% block css %}
+
 <style>
+    section{
+        padding: 50px 4%;
+    }
     .scrape {
         display: grid;
         grid-template-columns: repeat(2, 2fr);
         grid-gap: 1.5rem;
         align-items: center;
-        padding: 53px 8%;
     }
-
+    .scrape-img{
+        display: flex;
+        justify-content: center;}
     .scrape-img svg {
         max-width: 100%;
         width: 580px;
@@ -69,6 +74,11 @@
         animation: an1 1s ease infinite;
     }
 
+    .heading{
+        display: flex;
+        justify-content: center;
+    }
+
     @keyframes an1 {
         0% {
             transform: rotate(0turn);
@@ -104,14 +114,37 @@
             transform: rotateZ(-20deg);
         }
     }
+     @media only screen and (max-width:1075px) {
+
+      .scrape{
+    display: grid;
+            grid-template-columns: none;
+          padding: 0 3%;
+    grid-template-rows: repeat(1, 1fr);
+  }
+
+   .scrape div:nth-of-type(1) {
+    order: 2;
+  }
+
+  .scrape:nth-of-type(2) {
+    order: 1;
+  }
+    }
 
 </style>
 
 {% endblock %}
 
 {% block body %}
-<section class="scrape" id="scrape">
-    <div class="scrape-text" data-aos="fade-right">
+<section  id="scrape">
+      <div class="heading two" data-aos="fade-down"
+     data-aos-duration="3000">
+    <h2> Scraping Portal</h2>
+    <br><br>
+</div>
+    <div class="scrape">
+        <div class="scrape-text" data-aos="fade-right">
         <h1>Step 2</h1>
         <p>
             To start scraping data from Instagram for a trending hashtag, please
@@ -247,6 +280,8 @@
             </defs>
         </svg>
     </div>
+    </div>
+
 </section>
 {% endblock %}
 

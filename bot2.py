@@ -2,14 +2,12 @@
 # !$@%67
 
 import time
-
 import numpy as np
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from sqlalchemy import create_engine
-from datetime import datetime
 
 
 # --------------------------------------------- **BOT 1---------------------------------------------------------**
@@ -42,16 +40,8 @@ def login(driver, instahandle, instapassword, sleeptime):
 def skip_login_info(driver, sleeptime):
     # save your login info?
     time.sleep(sleeptime)
-
     notnow = driver.find_element(By.CSS_SELECTOR, "._ac8f>div")
 
-
-#
-
-# def turn_off_notif(driver, sleeptime):
-#     # turn on notif
-#     time.sleep(sleeptime)
-#     notnow2 = driver.find_element("xpath", "//button[contains(text(), 'Not Now')]").click()
 
 
 # searchbox
@@ -195,8 +185,7 @@ def convert_df_to_csv(df):
 # ---------------------------------------------**BOT 2**-----------------------------------------
 
 from datetime import datetime
-
-
+import sqlite3
 def save_dataframe(df: pd.DataFrame):
     val = datetime.now().strftime("_%d_%m_%y")
     print(val)
@@ -207,9 +196,6 @@ def save_dataframe(df: pd.DataFrame):
 
 
 # Adding posts Col to DB
-import sqlite3
-
-
 def insertColPost(tableName):
     conn = sqlite3.connect('hashtags.sqlite3')
     cur = conn.cursor()
@@ -271,9 +257,7 @@ def readSqliteTable(tableName, driver, sleeptime):
 
 def sqlToDf(tableName):
     conn = sqlite3.connect('hashtags.sqlite3')
-    sql_query = pd.read_sql_query(f'''
-                                   SELECT * FROM {tableName}
-                                   ''', conn)
+    sql_query = pd.read_sql_query(f''' SELECT * FROM {tableName}''', conn)
     df = pd.DataFrame(sql_query, columns=['tag', 'link', 'page', 'date', 'img', 'posts'])
     df['date'] = pd.to_datetime(df['date'])
     df['posts'] = df['posts'].replace(',', '', regex=True)
