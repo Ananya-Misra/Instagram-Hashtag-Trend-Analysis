@@ -76,15 +76,15 @@ def scroller(driver, timeout, sleeptime):
         print(timeout, 'scroll time')
         scrolldown = driver.execute_script(
             "window.scrollTo(0, document.body.scrollHeight);var scrolldown=document.body.scrollHeight;return scrolldown;")
-        if last_count == scrolldown:
-            match = True
-        if timeout == 1:
+        if timeout == 0:
             break
         else:
             timeout -= 1
 
+    print('break', timeout)
 
-def insta_posts(driver, sleeptime):
+
+def insta_posts(driver, sleeptime, limit=10):
     posts = []
     links = driver.find_elements(By.TAG_NAME, 'a')
     for link in links:
@@ -228,10 +228,3 @@ def sqlToDf(tableName):
     df['posts'] = df['posts'].astype(float)
     df = df.dropna()
     return df
-
-# -------------------------***Calling Functions***
-
-# tableName=save_dataframe(dataframe)
-# mdriver = webdriver.Chrome(ChromeDriverManager().install())
-# insertColPost("hashtag_"+tableName)
-# readSqliteTable("hashtag_"+tableName,mdriver,3)
